@@ -15,7 +15,7 @@ router.post('/generate-pdf', async (req, res) => {
     browser = await chromium.puppeteer.launch({
       args: chromium.args,
       defaultViewport: chromium.defaultViewport,
-      executablePath: await chromium.executablePath,
+      executablePath: await chromium.executablePath || '/usr/bin/chromium',
       headless: chromium.headless,
     });
 
