@@ -9,15 +9,15 @@ router.post('/generate-pdf', async (req, res) => {
     return res.status(400).json({ error: 'Missing HTML content' });
   }
 
-  let browser = null;
-
   try {
-    browser = await chromium.puppeteer.launch({
+    const browser = await chromium.puppeteer.launch({
       args: chromium.args,
       defaultViewport: chromium.defaultViewport,
       executablePath: await chromium.executablePath || '/usr/bin/chromium',
       headless: chromium.headless,
+      ignoreHTTPSErrors: true,
     });
+    
 
     const page = await browser.newPage();
     await page.setContent(html, { waitUntil: 'networkidle0' });
