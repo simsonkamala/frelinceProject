@@ -6,16 +6,28 @@ const mongoose = require("mongoose")
 const port = process.env.PORT || 5000
 app.use(cors())
 app.use(express.json())
+<<<<<<< HEAD
 // mongodb://kirenadmin:kirenadmin@localhost:27017/"kireninvoice"?authSource=admin
 mongoose.connect(process.env.MONGO_URL)
+=======
+// mongodb://kirenadmin:kirenadmin@192.168.1.3:27017/admin?authSource=admin
+mongoose.connect(process.env.MONGO_URL,{
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+>>>>>>> 5f615d7 (Fix PDF generation with Puppeteer in production)
 const db = mongoose.connection
 
 // --------- For DataBase Connection -----------
 db.on("error", () => ( console.log(" DataBase Connection Error ....") ))
 db.on("open", () => ( console.log(" DataBase Connection Successfull.... ") ))
-
+// ------- CRED Operation logic -------------
 const mainlogics = require("./dataSchemaAndLogics/mainlogic")
 app.use("/mainlogics", mainlogics)
+// -------- Download ---------
+const downloadData = require("./download/download")
+app.use("/download", downloadData)
+// -------- Listening Port -----------
 app.listen(port, () => {
     console.log(` 💽 Server is Running......🏃🏼‍♂️` )
 })
