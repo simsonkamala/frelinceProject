@@ -22,7 +22,7 @@ db.on("open", () => ( console.log(" DataBase Connection Successfull.... ") ))
 const mainlogics = require("./dataSchemaAndLogics/mainlogic")
 app.use("/mainlogics", mainlogics)
 // -------- Download ---------
-const downloadData = require("./download/download")
+const downloadData = require("./downloads/download")
 app.use("/download", downloadData)
 // -------- Listening Port -----------
 app.listen(port, () => {
